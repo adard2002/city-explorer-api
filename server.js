@@ -16,7 +16,11 @@ console.log('js is running!');
 
   app.use(express.static('./public'));
   app.use(cors());
-  
+
+  app.get('/', (request, response) => {
+    response.send('You have found the home page! ');
+  });
+
   app.get('/location', (req, res) => {
     const dataArrFromLocationFile = require('./data/location.json'); // do localhost:3000/location to bring up a few names and latitude and longitude
     const dataObjFromJson = dataArrFromLocationFile[0];
