@@ -35,6 +35,18 @@ console.log('js is running!');
     res.send(newLocation);
   });
 
+  app.get('/weather', (request, response) => {
+    const theDataArrayFromTheWeatherJson = require('./data/weather.json');
+    const theDataOjbFromJson = theDataArrayFromTheWeatherJson.data[0];
+    //   const searchedCity = request.query.city;
+    const newWeather = new Weather (
+      // searchedCity,
+      theDataOjbFromJson.weather.description,
+      theDataOjbFromJson.valid_date
+    );
+    response.send(newWeather);
+  });
+
 function Location(searchedCity, display_name, lat, lon) {
   this.searchedCity = searchedCity;
   this.formatted_query = display_name;
@@ -42,6 +54,9 @@ function Location(searchedCity, display_name, lat, lon) {
   this.longitude = parseFloat(lon);
 }
 
-
+function Weather(weather, valid_date) {
+  this.forecast = weather;
+  this.time = valid_date;
+}
 
 app.listen(PORT,() => console.log(`listening on port ${PORT}`));
