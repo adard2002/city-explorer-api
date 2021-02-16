@@ -3,9 +3,7 @@ console.log('js is running!');
 
 
   const express = require('express');
-
   const cors = require('cors');
-
   const PORT = process.env.PORT || 3000;
 
 
@@ -18,7 +16,7 @@ console.log('js is running!');
   app.use(cors());
 
   app.get('/', (request, response) => {
-    response.send('You have found the home page! ');
+    response.send('You have found the home page!');
   });
 
   app.get('/location', (req, res) => {
@@ -58,5 +56,7 @@ function Weather(weather, valid_date) {
   this.forecast = weather;
   this.time = valid_date;
 }
+
+
 
 app.listen(PORT,() => console.log(`listening on port ${PORT}`));
