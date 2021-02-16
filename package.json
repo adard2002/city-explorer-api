@@ -1,0 +1,27 @@
+{
+  "name": "city-explorer-api",
+  "version": "1.0.0",
+  "description": "1. Draw the web request response cycle for the task at hand (about 15 minutes). Document the data flow: identify inputs and outputs for each part of the cycle. Outline the functions that support this data flow. 2. Do a formal code review of each person’s code (15 minutes each). Open your partner’s GitHub Pull Request on your laptop. Identify an area in the code that: you don’t understand or seams overly complex or you see a way to improve or you want more information on or you really like or think is interesting 3. Add kind comments or questions inline using the GitHub review feature. You will then work independently for the rest of the day, implementing your plan, coding in your own repository, submitting your own pull request.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adard2002/city-explorer-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adard2002/city-explorer-api/issues"
+  },
+  "homepage": "https://github.com/adard2002/city-explorer-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "node": "^15.8.0"
+  }
+}
