@@ -24,25 +24,24 @@ console.log('js is running!');
   // Map should show up if you have the API link in typed in the text box at the bottom of the city explorer site where it asks for an API key.
   // If the user has /location at the end of the link they will be taken to the location page which will bring up the searchedCity, display_name, lat, and lon
   app.get('/location', (req, res) => {
-    const dataArrFromLocationFile = require('./data/location.json'); // do localhost:3000/location to bring up a few names and latitude and longitude
-    const dataObjFromJson = dataArrFromLocationFile[0];
+    const locationDataArray = require('./data/location.json'); // do localhost:3000/location to bring up a few names and latitude and longitude
+    const locationDataObjFromJson = locationDataArray[0];
     const searchedCity = req.query.city;
 
-    const newLocation = new Location(searchedCity, dataArrFromLocationFile);
+    const newLocation = new Location(searchedCity, locationDataArray);
     res.status(200).json(newLocation);
   });
 
   // If the user is taken to the page with /weather at the very end of the link they will be taken to the location which displays the weather of the area they have searched for. The weather will show what the weather will be for 2 days, like tuesday and wednesday etc.
+  // This does show up on the nodemon live port. But not on the city explorer site.
   app.get('/weather', (request, response) => {
     const weatherDataArray = require('./data/weather.json'); // Data retrieved from Weather.json file for the provided location
-    const dataOjbFromJson = weatherDataArray.data[0];
-    //   const searchedCity = request.query.city;
-    const newWeather = new Weather (
-      // searchedCity,
-      dataOjbFromJson.weather.description, //this returns a description of the weather "few clouds"
-      dataOjbFromJson.valid_date //this returns the date of the day with the cooresponding weather
-    );
-    response.send(newWeather);
+    const weatherDataOjbFromJson = [];
+
+    weatherDataArray.data.forEach(weatherDaily =>{
+      weatherDataOjbFromJson.push(new Weather(weatherDaily));
+    });
+    response.send(weatherDataOjbFromJson);
   });
 
   // Constructor functions for the Location and Weather
