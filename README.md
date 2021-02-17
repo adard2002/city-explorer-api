@@ -18,12 +18,12 @@ You will have access to view the code base for the client, but will not be able 
 
 For this lab assignment, you will convert a location entered by the user into a latitude and longitude, then use those values to request weather information for that location. As your City Explorer back end progresses in labs 6 through 9, you will use the latitude and longitude to request information from other APIs from the same search query.
 
-Number and name of feature: ________________________________
+Number and name of feature: Lab 06, Feature 2
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 2 hours
 
-Start time: _____
+Start time: 1:20pm
 
-Finish time: _____
+Finish time: 
 
-Actual time needed to complete: _____
+Actual time needed to complete: 
