@@ -44,7 +44,7 @@ console.log('js is running!');
     response.send(weatherDataOjbFromJson);
   });
 
-  // Constructor functions for the Location and Weather
+  // ====== Constructor functions for the Location and Weather ======
 function Location(searchedCity, locationObject) {
   this.searchedCity = searchedCity;
   this.formatted_query = locationObject[0].display_name;
@@ -57,6 +57,24 @@ function Weather(weather, valid_date) {
   this.time = valid_date;
 }
 
+  // ========== Error Handle Function ========
+  function errorHandler(error, req, res, next) {
+    console.error(error);
+    res.status(500).json({
+      error: true,
+      message: error.message
+    });
+  }
 
+  function notFoundHandler(req, res) {
+    res.status(404).json({
+      notFound: true,
+    });
+  }
 
+app.use('*', (req, res) => res.send('Sorry, something went wrong'));
+app.use(errorHandler);
+app.use(notFoundHandler);
+
+// ====== PORT listener ====== 
 app.listen(PORT,() => console.log(`listening on port ${PORT}`));
