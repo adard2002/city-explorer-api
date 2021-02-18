@@ -38,9 +38,10 @@ console.log('js is running!');
     const weatherDataArray = require('./data/weather.json'); // Data retrieved from Weather.json file for the provided location
     const weatherDataOjbFromJson = [];
 
-    weatherDataArray.data.forEach(weatherDaily => {
+    weatherDataArray.data.map(weatherDaily => {
       weatherDataOjbFromJson.push(new Weather(weatherDaily));
     });
+    
     response.send(weatherDataOjbFromJson);
   });
 
@@ -64,12 +65,14 @@ function Weather(weatherDataArray) {
       error: true,
       message: error.message
     });
+    res.send('Error 500');
   }
 
   function notFoundHandler(req, res) {
     res.status(404).json({
       notFound: true,
     });
+    res.send('Error 404');
   }
 
 app.use('*', (req, res) => res.send('Sorry, something went wrong'));
