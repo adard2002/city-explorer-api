@@ -38,7 +38,7 @@ console.log('js is running!');
     const weatherDataArray = require('./data/weather.json'); // Data retrieved from Weather.json file for the provided location
     const weatherDataOjbFromJson = [];
 
-    weatherDataArray.data.forEach(weatherDaily =>{
+    weatherDataArray.data.forEach(weatherDaily => {
       weatherDataOjbFromJson.push(new Weather(weatherDaily));
     });
     response.send(weatherDataOjbFromJson);
@@ -52,9 +52,9 @@ function Location(searchedCity, locationObject) {
   this.longitude = locationObject[0].lon;
 }
 
-function Weather(weather, valid_date) {
-  this.forecast = weather;
-  this.time = valid_date;
+function Weather(weatherDataArray) {
+  this.forecast = weatherDataArray.weather.description;
+  this.time = weatherDataArray.valid_date;
 }
 
   // ========== Error Handle Function ========
