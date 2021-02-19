@@ -4,7 +4,8 @@ console.log('js is running!');
 
   const express = require('express');
   const cors = require('cors');
-  const PORT = process.env.PORT || 3000; 
+  const { response } = require('express');
+  const PORT = process.env.PORT || 3111; 
 
 
   require('dotenv').config();
@@ -16,20 +17,25 @@ console.log('js is running!');
   app.use(cors());
 
   // If user is taken to the home page the homepage will have text saying "You have found the home page!"
-  // app.get('/', (request, response) => {
-  //   response.send('You have found the home page!');
-  // });
+  app.get('/', (request, response) => {
+    response.send('You have found the home page!');
+  });
 
 
   // Map should show up if you have the API link in typed in the text box at the bottom of the city explorer site where it asks for an API key.
   // If the user has /location at the end of the link they will be taken to the location page which will bring up the searchedCity, display_name, lat, and lon
   app.get('/location', (req, res) => {
+    try{
     const locationDataArray = require('./data/location.json'); // do localhost:3000/location to bring up a few names and latitude and longitude
     const locationDataObjFromJson = locationDataArray[0];
     const searchedCity = req.query.city;
 
     const newLocation = new Location(searchedCity, locationDataArray);
     res.status(200).json(newLocation);
+    }
+    catch(error){
+      response.status(500).send(error + 'Something went wrong');
+    }
   });
 
   // If the user is taken to the page with /weather at the very end of the link they will be taken to the location which displays the weather of the area they have searched for. The weather will show what the weather will be for 2 days, like tuesday and wednesday etc.
@@ -41,7 +47,6 @@ console.log('js is running!');
     weatherDataArray.data.map(weatherDaily => {
       weatherDataOjbFromJson.push(new Weather(weatherDaily));
     });
-    
     response.send(weatherDataOjbFromJson);
   });
 
@@ -59,24 +64,16 @@ function Weather(weatherDataArray) {
 }
 
   // ========== Error Handle Function ========
-  function errorHandler(error, req, res, next) {
-    console.error(error);
-    res.status(500).json({
-      error: true,
-      message: error.message
-    });
-    res.send('Error 500');
-  }
 
   function notFoundHandler(req, res) {
+    console.error(error);
     res.status(404).json({
       notFound: true,
     });
     res.send('Error 404');
   }
 
-app.use('*', (req, res) => res.send('Sorry, something went wrong'));
-app.use(errorHandler);
+app.use('*', (req, res) => res.send('Sorry, this route does not exist'));
 app.use(notFoundHandler);
 
 // ====== PORT listener ====== 
